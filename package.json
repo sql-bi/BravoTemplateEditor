@@ -3,7 +3,7 @@
 	"displayName": "Bravo Template Editor",
 	"description": "Bravo Template Editor is the companion editor of Bravo for Power BI. It allows to edit, compile and preview custom date templates for Power BI reports.",
 	"publisher": "SQLBI",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"engines": {
 		"vscode": "^1.67.0"
