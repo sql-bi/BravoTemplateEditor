@@ -112,6 +112,10 @@
     border-bottom-color: var(--vscode-foreground);
 }
 
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover {
+    background-color: var(--vscode-tree-tableOddRowsBackground);
+}
+
 /*.tabulator .tabulator-header .tabulator-calcs-holder .tabulator-row {
     background: @table-cell-back-color  !important;
 
@@ -160,7 +164,7 @@
   }
 
 .tabulator-row {
-    background-color: none;
+    background: none;
     border-top: 1px solid var(--vscode-tree-tableColumnsBorder);
 
     .no-borders & {
@@ -177,7 +181,10 @@
 }
 
 .tabulator-row.tabulator-row-even {
-    background-color: var(--vscode-tree-tableOddRowsBackground);
+    background-color: var(--vscode-tree-tableEvenRowsBackground);
+}
+.tabulator-row.tabulator-row-odd {
+    background: none;
 }
 
 .tabulator-row:not(.tabulator-calcs):not(.row-inactive):hover,
