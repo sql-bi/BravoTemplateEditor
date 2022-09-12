@@ -1,0 +1,74 @@
+// main: main.less
+
+.powerbi-view {
+	//overflow: hidden;
+	
+	.browse-section {
+		margin:10px 0 10px 30px;
+		text-align: right;
+	}
+	.pbi-observing {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--vscode-sideBar-background);
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		padding: 20px;
+		display: flex;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		visibility: hidden;
+
+		.waiting-logo {
+			text-align: center;
+			opacity: 0.4;
+
+			img {
+				animation: appearing 1.5s ease-in-out infinite reverse;
+				width: 100px;
+				max-width: 80%;
+				height: auto;
+				margin-bottom: 10px;
+			}
+		}
+	}
+}
+
+.table-view {
+	padding: 0 0 0 var(--container-paddding);
+	height: 100vh;
+
+	.generating-preview {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#preview-table {
+		height: 100%;
+		display: none;
+
+		&.tabulator {
+			display: initial;
+		}
+	}
+}
+
+@keyframes appearing {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

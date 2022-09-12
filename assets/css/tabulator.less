@@ -1,0 +1,235 @@
+// main: main.less
+@import (inline) "../../node_modules/tabulator-tables/dist/css/tabulator.css";
+
+.tabulator {
+    border: none;
+    background: none !important;
+
+    .row-disabled {
+        opacity: 0.4;
+    }
+
+    .tabulator-headers .column-select {
+        padding-left: 1px;
+    }
+
+    .column-select {
+        width: 38px !important; //This avoid showing horizontal scrollbar (Tabulator bug)
+        min-width: 38px !important;
+    }
+
+    .tabulator-unselectable .column-select input {
+        display: none;
+
+    }
+
+    .tree-toggle {
+        display: inline-block;
+        width: 26px;
+        text-align: center;
+
+        &:before {
+            font-size: 20px;
+            font-weight: normal !important;
+            vertical-align: text-top;
+            margin: 0 !important;
+            cursor: pointer !important;
+        }
+    }
+
+    .item-type {
+        width: 30px;
+        display: inline-block;
+        pointer-events: none;
+    }
+
+    /*.tabulator-tree-level-0,
+      .tabulator-tree-level-1,
+      .tabulator-tree-level-2,
+      .tabulator-tree-level-3,
+      .tabulator-tree-level-4,
+      .tabulator-tree-level-5 {
+        .column-name {
+          //font-weight:bold;
+          cursor: pointer;
+        }
+      }*/
+}
+.tabulator .tabulator-header {
+    background-color: var(--vscode-sideBar-background);
+    border-top: 2px solid var(--vscode-editor-background);
+    border-bottom: 1px solid var(--vscode-tree-tableColumnsBorder);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.tabulator.no-borders .tabulator-header {
+    border: none;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+    border-right: 1px solid var(--vscode-tree-tableColumnsBorder);
+    background: none;
+
+    &:last-child {
+        border-right: 0;
+    }
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-moving {
+    border: none;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-sorter .tabulator-arrow {
+    border-bottom-color: var(--vscode-settings-dropdownBorder);
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-col-group .tabulator-col-group-cols {
+    border-top: 1px solid var(--vscode-tree-tableColumnsBorder);
+}
+
+.tabulator.no-borders .tabulator-header .tabulator-col.tabulator-col-group .tabulator-col-group-cols {
+    border: none
+}
+
+.tabulator .tabulator-header .tabulator-col:first-child .tabulator-col-resize-handle.prev {
+    display: none;
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort="none"] .tabulator-col-content .tabulator-col-sorter {
+    color: var(--vscode-settings-dropdownBorder);
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort="none"] .tabulator-col-content .tabulator-col-sorter .tabulator-arrow {
+    border-bottom-color: var(--vscode-settings-dropdownBorder);
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort="ascending"] .tabulator-col-content .tabulator-col-sorter {
+    color: var(--vscode-foreground);
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort="ascending"] .tabulator-col-content .tabulator-col-sorter .tabulator-arrow {
+    border-bottom-color: var(--vscode-foreground);
+}
+
+/*.tabulator .tabulator-header .tabulator-calcs-holder .tabulator-row {
+    background: @table-cell-back-color  !important;
+
+    .dark & {
+        background: @table-cell-back-color-dark  !important;
+    }
+}*/
+
+.tabulator .tabulator-tableholder .tabulator-placeholder {
+    width: 90%;
+}
+
+.tabulator .tabulator-tableholder .tabulator-placeholder[tabulator-render-mode="virtual"] {
+    min-height: auto;
+    min-width: auto;
+}
+
+.tabulator .tabulator-tableholder .tabulator-placeholder .tabulator-placeholder-contents {
+    font-size: 14px;
+    font-weight: normal;
+    color: #ccc;
+    padding: 0 5px 5px 5px;
+    //text-align: left;
+}
+
+.tabulator .tabulator-tableholder .tabulator-table {
+    background: none !important;
+    color: var(--vscode-foreground);
+}
+
+.tabulator .tabulator-footer {
+    padding: 10px 10px;
+    background-color: transparent !important;
+    text-align: right;
+    border: none;
+}
+
+.tabulator .tabulator-footer .tabulator-calcs-holder {
+    margin: -5px -10px 5px -10px;
+    background: none !important;
+    border: none !important;
+}
+
+.tabulator .tabulator-footer .tabulator-calcs-holder .tabulator-row {
+    background: none !important;
+  }
+
+.tabulator-row {
+    background-color: none;
+    border-top: 1px solid var(--vscode-tree-tableColumnsBorder);
+
+    .no-borders & {
+        border: none
+    }
+
+    &.tabulator-calcs-bottom {
+        border: none
+    }
+
+    &:first-child {
+        border-top: none;
+    }
+}
+
+.tabulator-row.tabulator-row-even {
+    background-color: var(--vscode-tree-tableOddRowsBackground);
+}
+
+.tabulator-row:not(.tabulator-calcs):not(.row-inactive):hover,
+.tabulator-row.active {
+    background-color: var(--vscode-list-hoverBackground);
+}
+
+.tabulator-row.tabulator-selected,
+.tabulator-row.tabulator-selected:hover {
+    background: none;
+    cursor: default;
+}
+
+.tabulator-row.tabulator-selectable:hover {
+    cursor: default;
+    background-color: var(--vscode-list-hoverBackground);
+}
+/*
+.tabulator-row.row-active,
+.tabulator-row.row-active:hover {
+    .border-radius();
+    border-color: transparent !important;
+    background-color: @table-cell-active-back-color  !important;
+
+    .dark & {
+        background-color: @table-cell-active-back-color-dark  !important;
+    }
+
+    &.row-hidden .column-name:after {
+        background-color: @table-cell-active-back-color  !important;
+
+        .dark & {
+            background-color: @table-cell-active-back-color-dark  !important;
+        }
+    }
+
+    &+.tabulator-row {
+        border-color: transparent !important;
+    }
+}*/
+
+.tabulator-row .tabulator-cell {
+    padding: 6px 4px;
+    border-right: none;
+  
+    [class^="icon-"], [class*=" icon-"] {
+      &:before {
+        font-size: 20px;
+      }
+    }
+}
+
+.tabulator-row .tabulator-cell:first-child .tabulator-col-resize-handle.prev {
+    display: none;
+}

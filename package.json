@@ -1,0 +1,401 @@
+{
+	"name": "bravo-template-editor",
+	"displayName": "Bravo Template Editor",
+	"description": "Bravo Template Editor is the companion editor of Bravo for Power BI. It allows to edit, compile and preview custom date templates for Power BI reports.",
+	"publisher": "SQLBI",
+	"version": "1.0.0",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"engines": {
+		"vscode": "^1.67.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"Power BI",
+		"DAX",
+		"SQLBI",
+		"Calendar",
+		"Date"
+	],
+	"activationEvents": [
+		"workspaceContains:./bravo-config.json"
+	],
+	"main": "./dist/extension.js",
+	"icon": "assets/images/extension.png",
+	"badges": [
+
+	],
+	"galleryBanner": {
+		"color": "#232323",
+		"theme": "dark"
+	},
+	"homepage": "https://bravo.bi",
+	"bugs": {
+		"url": "https://github.com/sql-bi/BravoTemplateEditor/issues",
+		"email": "info@sqlbi.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sql-bi/BravoTemplateEditor.git"
+	},
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "bravo",
+					"title": "Bravo Template Editor",
+					"icon": "assets/images/bravo-menu.svg"
+				}
+			]
+		},
+		"views": {
+			"bravo": [
+				{
+					"id": "bravo.powerbi",
+					"type": "webview",
+					"name": "Power BI Report",
+					"when": "bravo.isTemplateWorkspace"
+				},
+				{
+					"id": "bravo.modelChanges",
+					"name": "Model Changes Preview",
+					"when": "bravo.isTemplateWorkspace"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "bravo.modelChanges",
+				"contents": "Preview disabled.",
+				"when": "!config.bravo.hostEnabled"
+			},
+			{
+				"view": "bravo.modelChanges",
+				"contents": "Preview not available.",
+				"when": "(config.bravo.hostEnabled && !bravo.canPreview) || bravo.connectionFailed"
+			},
+			{
+				"view": "bravo.modelChanges",
+				"contents": "Select a report to see the preview.",
+				"when": "config.bravo.hostEnabled && bravo.canPreview && !bravo.hasReport && !bravo.connectionFailed"
+			},
+			{
+				"view": "bravo.modelChanges",
+				"contents": "Generating preview...",
+				"when": "config.bravo.hostEnabled && bravo.canPreview && bravo.hasReport && !bravo.connectionFailed"
+			}
+		],
+		"icons": {
+			"bravo-table": {
+				"description": "Table icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E92A"
+				}
+			},
+			"bravo-column": {
+				"description": "Column icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E922"
+				}
+			},
+			"bravo-date-table": {
+				"description": "Date table icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E924"
+				}
+			},
+			"bravo-decimal": {
+				"description": "Decimal icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E925"
+				}
+			},
+			"bravo-double": {
+				"description": "Double icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E926"
+				}
+			},
+			"bravo-int32": {
+				"description": "Int32 icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E927"
+				}
+			},
+			"bravo-int64": {
+				"description": "Int64 icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E927"
+				}
+			},
+			"bravo-currency": {
+				"description": "Currency icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E923"
+				}
+			},
+			"bravo-boolean": {
+				"description": "Boolean icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E921"
+				}
+			},
+			"bravo-datetime": {
+				"description": "Date time icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E92D"
+				}
+			},
+			"bravo-visible": {
+				"description": "Visible icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E92F"
+				}
+			},
+			"bravo-hidden": {
+				"description": "Hidden icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E92E"
+				}
+			},
+			"bravo-table-fx": {
+				"description": "Table fx icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E930"
+				}
+			},
+			"bravo-folder-fx": {
+				"description": "Folder fx icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E931"
+				}
+			},
+			"bravo-hierarchy": {
+				"description": "Hierarchy icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E934"
+				}
+			},
+			"bravo-measure": {
+				"description": "Measure icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E984"
+				}
+			},
+			"bravo-folder": {
+				"description": "Folder icon",
+				"default": {
+					"fontPath": "./assets/images/bravo.woff",
+					"fontCharacter": "\\E932"
+				}
+			}
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "bravo.refreshReports",
+					"when": "view == bravo.powerbi",
+					"group": "navigation"
+				},
+				{
+					"command": "bravo.refreshModelChanges",
+					"when": "view == bravo.modelChanges && bravo.hasReport",
+					"group": "navigation"
+				},
+				{
+					"command": "bravo.treeIsTree",
+					"when": "view == bravo.modelChanges && bravo.hasReport && config.bravo.treeView",
+					"group": "inline"
+				},
+				{
+					"command": "bravo.treeIsPlain",
+					"when": "view == bravo.modelChanges && bravo.hasReport && !config.bravo.treeView",
+					"group": "inline"
+				},
+				{
+					"command": "bravo.hiddenIsHidden",
+					"when": "view == bravo.modelChanges && bravo.hasReport && !config.bravo.showHidden",
+					"group": "inline"
+				},
+				{
+					"command": "bravo.hiddenIsVisible",
+					"when": "view == bravo.modelChanges && bravo.hasReport && config.bravo.showHidden",
+					"group": "inline"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "bravo.hidden",
+					"when": "view == bravo.modelChanges && viewItem == hidden",
+					"group": "inline"
+				},
+				{
+					"command": "bravo.copyNode",
+					"when": "view == bravo.modelChanges"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "bravo.previewTable",
+					"group": "navigation",
+					"when": "resourceScheme == dax-table"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "bravo.refreshReports",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "bravo.refreshModelChanges",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "bravo.hidden",
+				"title": "Hidden",
+				"icon": "$(bravo-hidden)"
+			},
+			{
+				"command": "bravo.viewTable",
+				"title": "View Table"
+			},
+			{
+				"command": "bravo.viewColumn",
+				"title": "View Column"
+			},
+			{
+				"command": "bravo.viewMeasure",
+				"title": "View Measure"
+			},
+			{
+				"command": "bravo.previewTable",
+				"title": "Preview Data",
+				"icon": "$(open-preview)"
+			},
+			{
+				"command": "bravo.treeIsPlain",
+				"title": "‎ ‎ ‎ ‎ Show as Tree"
+			},
+			{
+				"command": "bravo.treeIsTree",
+				"title": "✓ Show as Tree"
+			},
+			{
+				"command": "bravo.hiddenIsHidden",
+				"title": "‎ ‎ ‎ ‎ Show Hidden"
+			},
+			{
+				"command": "bravo.hiddenIsVisible",
+				"title": "✓ Show Hidden"
+			},
+			{
+				"command": "bravo.copyNode",
+				"title": "Copy"
+			}
+		],
+		"languages": [
+			{
+				"id": "dax",
+				"aliases": [
+					"DAX",
+					"dax"
+				],
+				"extensions": [
+					".dax"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "dax",
+				"scopeName": "source.dax",
+				"path": "./syntaxes/dax.tmLanguage.json"
+			}
+		],
+		"configuration": {
+			"title": "Bravo Template Editor",
+			"properties": {
+				"bravo.hostEnabled": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Preview template on an existing model using Bravo for Power BI."
+				},
+				"bravo.previewRows": {
+					"type": "number",
+					"default": 100,
+					"markdownDescription": "Specifies the number of rows to show in the model changes preview."
+				},
+				"bravo.treeView": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Toggle tree view in the model changes view."
+				},
+				"bravo.showHidden": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Show hidden entities in the model changes view."
+				}
+			}
+		}
+	},
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": false,
+			"description": "This extension needs to update files and execute external processes to work properly."
+		}
+	},
+	"scripts": {
+		"vscode:package": "npx vsce package --out dist/bravo-template-editor.vsix",
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "14.x",
+		"@types/vscode": "^1.67.0",
+		"@typescript-eslint/eslint-plugin": "^5.21.0",
+		"@typescript-eslint/parser": "^5.21.0",
+		"@vscode/test-electron": "^2.1.3",
+		"eslint": "^8.14.0",
+		"glob": "^8.0.1",
+		"mocha": "^9.2.2",
+		"ts-loader": "^9.2.8",
+		"typescript": "^4.6.4",
+		"webpack": "^5.70.0",
+		"webpack-cli": "^4.9.2",
+		"tabulator-tables": "^5.3.2"
+	},
+	"dependencies": {
+		"node-fetch": "*",
+		"sanitize-html": "^2.6.1"
+	}
+}
