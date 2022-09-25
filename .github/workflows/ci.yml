@@ -18,10 +18,6 @@ jobs:
         run: npm ci --prefer-offline
         shell: bash
       
-      # GITHUB_RUN_ID is a unique number for each run within a repository and does not change if you re-run the workflow run.
-      #- name: Update extension build number
-      #  run: npm run updateBuildNumber -- --buildNumber $GITHUB_RUN_ID
-      #  shell: bash
       #- name: Run compile
       #  run: npm run compile
       #  shell: bash
@@ -41,9 +37,9 @@ jobs:
       - name: Build VSIX
         run: vsce package --out ${{ env.ARTIFACT_VSIX }}
 
-      - name: Upload VSIX
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          path: ${{ env.ARTIFACT_VSIX }}
-          if-no-files-found: error
-        if: github.event_name == 'pull_request'
+      #- name: Upload VSIX
+      #  uses: actions/upload-artifact@v3.1.0
+      #  with:
+      #    path: ${{ env.ARTIFACT_VSIX }}
+      #    if-no-files-found: error
+      #  if: github.event_name == 'pull_request'
