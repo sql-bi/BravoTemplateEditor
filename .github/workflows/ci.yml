@@ -1,0 +1,49 @@
+name: 'CI'
+on:
+  pull_request:
+  workflow_dispatch:
+env:
+  ARTIFACT_VSIX: 'dist/bravo-template-editor.vsix'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16.x
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+        shell: bash
+      
+      # GITHUB_RUN_ID is a unique number for each run within a repository and does not change if you re-run the workflow run.
+      #- name: Update extension build number
+      #  run: npm run updateBuildNumber -- --buildNumber $GITHUB_RUN_ID
+      #  shell: bash
+      #- name: Run compile
+      #  run: npm run compile
+      #  shell: bash
+      #- name: Run linter
+      #  run: npm run lint
+      #  shell: bash
+      #- name: Run compile tests
+      #  run: npm run compile-tests
+      #  shell: bash
+      #- name: Run tests
+      #  run: npm run test
+      #  shell: bash
+      
+      - name: Install vsce
+        run: npm install -g vsce
+        shell: bash
+      - name: Build VSIX
+        run: vsce package --out ${{ env.ARTIFACT_VSIX }}
+
+      - name: Upload VSIX
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          path: ${{ env.ARTIFACT_VSIX }}
+          if-no-files-found: error
+        if: github.event_name == 'pull_request'
